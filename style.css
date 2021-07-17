@@ -1,8 +1,12 @@
-/*RESET ========================================================= */
+/*====  RESET ============================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
 }
 
 a {
@@ -14,11 +18,7 @@ img {
   height: auto;
 }
 
-ul {
-  list-style: none;
-}
-
-/*VARIABLES ================================================================ */
+/*====  VARIABLES ============================ */
 :root {
   --header-height: 4.5rem;
 
@@ -32,10 +32,14 @@ ul {
   --text-color: hsl(0 0% 46%);
   --text-color-light: hsl(0 0% 98%);
   --body-color: hsl(0 0% 98%);
+
+  /*fonts sizes*/
+  --title-font-size: 1.875rem;
+  --subtittle-font-size: 1.1rem;
+
 }
 
-/*BASE ================================================== */
-
+/*===  BASE ============================ */
 html {
   scroll-behavior: smooth;
 }
@@ -47,8 +51,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.tittle {
-  font: 700 1.875rem 'Poppins', sans-serif;
+.title {
+  font: 700 var(--title-font-size) 'Poppins', sans-serif;
   color: var(--title-color);
   -webkit-font-smoothing: auto;
 }
@@ -73,8 +77,8 @@ body {
   height: 1px;
   background: linear-gradient(
     270deg,
-    hsla(var(--hue), 36%, 57%, 1) 0%,
-    hsla(var(--hue), 65%, 88%, 0.34) 100%
+    hsla(var(--hue), 36%, 57%, 1),
+    hsla(var(--hue), 65%, 88%, 0.34)
   );
 }
 
@@ -87,8 +91,7 @@ body {
   );
 }
 
-
-/*LAYOUT ======================================================= */
+/*====  LAYOUT ============================ */
 .container {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
@@ -103,16 +106,20 @@ body {
   padding: 5rem 0;
 }
 
-.section .tittle {
+.section .title {
   margin-bottom: 1rem;
 }
 
-section header {
-  margin-bottom: 4rem ; 
+.section .sub-title {
+  font-size: var(--subtittle-font-size);
 }
 
-section header strong {
-  color: var(--base-color) ;
+.section header {
+  margin-bottom: 4rem;
+}
+
+.section header strong {
+  color: var(--base-color);
 }
 
 #header {
@@ -127,51 +134,26 @@ section header strong {
   background-color: var(--body-color);
   width: 100%;
 }
-/* Transições para o JS ======================================================= */
 
 #header.scroll {
-  background: var(--base-color);
-  box-sizing: 0px 0px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
 }
 
-#header.scroll .logo span {
-  color: white;
+main {
+  margin-top: calc(var(--header-height) + 2rem);
 }
 
-#header.scroll .icon-menu {
-  color: white;
-} 
-
-#header.scroll .icon-close {
-  color: white;
+/*====  LOGO ============================ */
+.logo {
+  font: 700 1.31rem 'Poppins', sans-serif;
+  color: var(--title-color);
 }
 
-/* Togle menu ======================================================= */
-
-.toggle {
+.logo span {
   color: var(--base-color);
-  cursor: pointer;
 }
 
-nav .close {
-  visibility: hidden;
-  opacity: 0;
-
-  position: absolute;
-  top: -1.5rem;
-  right: 1.5rem;
-
-  transition: 0.2s;
-}
-
-nav.show .close {
-  visibility: visible;
-  opacity: 1;
-  top: 1.5rem;
-}
-
-/*Navigation ======================================================= */
- 
+/*====  NAVIGATION ============================ */
 nav {
   height: var(--header-height);
   display: flex;
@@ -184,26 +166,10 @@ nav ul li {
   text-align: center;
 }
 
-nav ul.grid {
-  gap: 4rem;
-}
-
-nav .menu ul {
-  display: none ;
-}
-
-nav .menu {
-  opacity: 0;
-  visibility: hidden;
-  top: -20rem;
-  transition: 1.2rem;
-}
-
 nav ul li a {
-  transition: 0.2s;
+  transition: color 0.2s;
   position: relative;
 }
-
 
 nav ul li a:hover {
   color: var(--base-color);
@@ -211,29 +177,48 @@ nav ul li a:hover {
 
 nav ul li a::after {
   content: '';
-  width: 100%;
+  width: 0%;
   height: 2px;
   background: var(--base-color);
 
   position: absolute;
   left: 0;
   bottom: -1.5rem;
+
+  transition: width 0.2s;
 }
 
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+nav .menu {
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition: 0.2s;
+}
+
+nav .menu ul {
+  display: none;
+}
+
+/* Mostrar menu */
 nav.show .menu {
   opacity: 1;
   visibility: visible;
-  
+
   background: var(--body-color);
+
   height: 100vh;
   width: 100vw;
+
   position: fixed;
   top: 0;
   left: 0;
-  
+
   display: grid;
   place-content: center;
-  
 }
 
 nav.show .menu ul {
@@ -243,17 +228,29 @@ nav.show .menu ul {
 nav.show ul.grid {
   gap: 4rem;
 }
-.logo {
-  font: 700 1.31rem 'Poppins', sans-serif;
-  color: var(--title-color);
-}
 
-.logo span {
+/* toggle menu */
+.toggle {
   color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
-main {
-  margin-top: calc(var(--header-height) + 2rem)
+nav .icon-close {
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+
+  transition: 0.2s;
+}
+
+nav.show div.icon-close {
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
 }
 
 /*====  HOME ============================ */
@@ -304,8 +301,7 @@ main {
   margin-bottom: 2rem;
 }
 
-/*About site ======================================================= */
-
+/*====  ABOUT ============================ */
 #about {
   background: white;
 }
@@ -331,7 +327,6 @@ main {
 
 #about .image img {
   position: relative;
-
 }
 
 #about .image img,
@@ -342,22 +337,18 @@ main {
 #about .text {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  text-align: center;
 }
 
-/*SERVICES ======================================================= */
-
+/*====  SERVICES ============================ */
 .cards.grid {
   gap: 1.5rem;
-  
 }
 
 .card {
   padding: 3.625rem 2rem;
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.88);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
   border-bottom: 0.25rem solid var(--base-color);
   border-radius: 0.25rem 0.25rem 0 0;
-  
   text-align: center;
 }
 
@@ -368,120 +359,216 @@ main {
   color: var(--base-color);
 }
 
-.card tittle {
+.card .title {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
 }
 
-/*Testmonials ======================================================= */
-
-.testmonials {
-  margin-bottom: 1rem;
+/*====  TESTIMONIALS ============================ */
+#testimonials {
   background: white;
 }
 
-.testmonials .container {
+#testimonials .container {
   margin-left: 0;
   margin-right: 0;
 }
 
-.testmonials header {
+#testimonials header {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   margin-bottom: 0;
 }
 
-.testmonials blockquote {
-  padding: 5rem;
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
-
+#testimonials blockquote {
+  padding: 2rem;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 0.25rem;
 }
 
-.testmonials blockquote p {
+#testimonials blockquote p {
   position: relative;
   text-indent: 1.875rem;
   margin-bottom: 1.5rem;
   color: var(--title-color);
 }
 
-.testmonials blockquote p span {
-  font: 700 3rem serif;
+#testimonials blockquote p span {
+  font: 700 2.5rem serif;
   position: absolute;
-  top: -.8rem;
+  top: -0.375rem;
   left: -1.875rem;
-
   color: var(--base-color);
 }
 
-.testmonials cite {
+#testimonials cite {
   display: flex;
   align-items: center;
   font-style: normal;
 }
 
-.testmonials cite img {
+#testimonials cite img {
   width: 2rem;
   height: 2rem;
   object-fit: cover;
   clip-path: circle();
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
-/* Swiper ============================================*/
-
+/* swiper */
 .swiper-slide {
   height: auto;
   padding: 4rem 1rem;
 }
 
+.swiper-pagination-bullet {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
 .swiper-pagination-bullet-active {
- background:  black;
-}
-
-/*Contatos e links*/
-
-.links {
-  margin-top: 2rem;
-}
-
-.whatsapp{
   background: var(--base-color);
-  padding: 1rem 2rem;
-  border-radius: 0.25rem;
-  margin-bottom: -2rem;
 }
 
-.whatsapp{
-  font-size: 20px;
-  color: white;
-  margin-bottom: 10rem;
+/*====  CONTACT ============================ */
+#contact .grid {
+  gap: 4rem;
 }
 
-.whatsapp:hover {
- color: black; 
-
- background: rgb(128, 193, 196);
+#contact .text p {
+  margin-bottom: 2rem;
 }
 
-.links ul .grid {
+#contact .button i,
+#contact ul li i {
+  font-size: 1.5rem;
+  margin-right: 0.625rem;
+}
+
+#contact ul.grid {
   gap: 2rem;
 }
 
-.links ul li i {
-  font-size: 1.5rem;
-  margin-right: 0.675rem;
+#contact ul li {
+  display: flex;
+  align-items: center;
 }
-.links ul li a,
-.links ul li p,
-.links ul li i,
-.map {
+
+#contact ul li i {
   color: var(--base-color);
 }
 
 
+/* footer */
 
+footer {
+  background: var(--base-color);
+  padding: 6rem;
+}
 
+div a {
+  font-size: 23px;
+}
 
+div a strong {
+  color: var(--title-color);
+}
 
+div a strong span {
+  color: var(--text-color-light);
+}
 
+.brand .logoFooter {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
 
+.brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+.social a {
+  margin-right: 2rem;
+}
+
+footer .social a {
+  color: var(--text-color-light);
+}
+
+/*Back-to-top*/
+
+.back-to-top {}
+
+.back-to-top{
+  background: var(--base-color-alt);
+  color: var(--text-color-light);
+  
+  right: 1rem;
+  bottom: 1rem;
+  clip-path: circle();
+  padding: 0.5rem;
+
+  position: fixed;
+  font-size: 1.2rem;
+  line-height: 0;
+
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(100%);
+
+}
+
+.icon-arrow-up {
+  color: var(--text-color-light);
+  font-weight: 100;
+}
+
+.back-to-top.show {
+  visibility: visible;
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+/* Response*/
+
+@media (min-width: 992px) {
+  :root {
+    --title-font-size: 2.2rem;
+    --subtittle-font-size: 1.125rem;
+  }
+
+}
+
+@media (min-width: 1023px) {
+
+  /*Home*/
+
+    .section .container .image {
+      width: 41rem;
+      height: 27rem;
+      left: 1rem;
+    }
+
+    
+    /*Services*/
+    
+    #services .title{
+      text-align: center;
+    }
+    
+    .card {
+      display: grid;
+      width: 352px;
+    }
+
+    .sub-title {
+    text-align: center;
+  }
+
+  .cards {
+    
+  }
+  
+} 
