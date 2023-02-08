@@ -49,6 +49,7 @@ body {
   color: var(--text-color);
   background: var(--body-color);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 .title {
@@ -260,6 +261,8 @@ nav.show div.icon-close {
 
 #home .container {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #home .image {
@@ -268,18 +271,18 @@ nav.show div.icon-close {
 
 #home .image::before {
   content: '';
-  height: 100%;
-  width: 100%;
+  height: 90%;
+  width: 80%;
   background: var(--base-color-second);
   position: absolute;
-  top: -16.8%;
-  left: 16.7%;
+  top: -13.8%;
+  left: 8.7%;
   z-index: 0;
 }
 
 #home .image img {
   position: relative;
-  right: 2.93rem;
+  width: 80%;
 }
 
 #home .image img,
@@ -291,6 +294,7 @@ nav.show div.icon-close {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   text-align: center;
+  width: 50%;
 }
 
 #home .text h1 {
@@ -308,6 +312,9 @@ nav.show div.icon-close {
 
 #about .container {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 #about .image {
@@ -321,7 +328,7 @@ nav.show div.icon-close {
   background: var(--base-color-second);
   position: absolute;
   top: -8.3%;
-  left: -33%;
+  left: -15%;
   z-index: 0;
 }
 
@@ -335,13 +342,17 @@ nav.show div.icon-close {
 }
 
 #about .text {
-  margin-left: 1.5rem;
+  max-width: 40%;
   margin-right: 1.5rem;
 }
 
 /*====  SERVICES ============================ */
 .cards.grid {
   gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -416,6 +427,12 @@ nav.show div.icon-close {
 }
 
 /* swiper */
+.swiper-pagination-cr {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .swiper-slide {
   height: auto;
   padding: 4rem 1rem;
@@ -498,8 +515,6 @@ footer .social a {
 
 /*Back-to-top*/
 
-.back-to-top {}
-
 .back-to-top{
   background: var(--base-color-alt);
   color: var(--text-color-light);
@@ -567,8 +582,5 @@ footer .social a {
     text-align: center;
   }
 
-  .cards {
-    
-  }
-  
+
 } 
